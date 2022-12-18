@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Risk of getting</title>
+</head>
+<body>
+<h1>Risk of getting ...</h1>
+<p>Take a look at my  ML models</p>
+<p>Here you can find quiz's that can help predict your chance of developing that disease in near future</p>
+<h2>Diseases:</h2>
+<ul>
+{%for d in diseases  %}
+    <li><a href="{% url 'home:disease' d.id%}">{{ d.name }}<a/> </li>
+{% endfor %}
+</ul>
+</body>
+</html>

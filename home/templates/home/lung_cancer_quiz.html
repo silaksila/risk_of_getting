@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load filter_question %}
+<head>
+    <meta charset="UTF-8">
+    <title>{{ disease }}</title>
+</head>
+<body>
+<h1>{{ disease }}</h1>
+<fieldset>
+<legend>Quiz</legend>
+{% for q in questions %}
+    <form action="{% url 'home:results' disease.id %}" method="post">{% csrf_token %}
+        <p>{{ q }}</p>
+        {% if q.id == 1 %}
+            <label for="age">Please enter your age: </label>
+            <input type="text" name="age" id="age"><br><br>
+        {% elif q.id == 2%}
+            <label for="Gender">Please enter your gender:</label>
+            <select name="gender" id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            </select><br><br>
+        {% else %}
+            <label for="level">Choose a level:</label>
+            <select name="level" id="level">
+            {% for choice in choices|filter_question:q.id%}
+                    <option value="{{ choice }}">{{ choice }}</option>
+                {% endfor %}
+                </select><br><br>{% endif %}
+{% endfor %}
+    <input type="submit" value="Done">
+    </form>
+</fieldset>
+</body>
+</html>
